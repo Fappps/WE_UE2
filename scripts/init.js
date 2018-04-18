@@ -10,13 +10,24 @@ $(document).ready(function() {
     var diagram = new Diagram("#arrow-sidebar-add", "#diagram", elementCounter, arrowCounter, controls);
 
     // TODO init: add drag functionality to devices in sidebar
-    $("div.device-image").draggable({helper: "clone", containment:"window"});
-    $(".device").draggable({ revert: "invalid", helper: "clone" });
+    $(".device").draggable({
+        revert: "invalid", helper: function (event) {
+            var clone = $(this).find(".device-image").clone();
+            return clone;
+        }
+    });
 
     //$("diagram").droppable();
     $("#diagram").droppable({
-        drop: function(event, ui) {
-            $(this).append($(ui.helper).clone());
+        drop: function (event, ui) {
+            var clone = $(ui.helper).clone();
+            var parentOffset = $(this).parent().offset(); 
+            var relX = event.pageX - parentOffset.left - 50;
+            var relY = event.pageY - parentOffset.top - 100;
+            clone.attr("style", "position: absolute; left: " + relX + "px; top: " + relY+"px;");
+            clone.attr("id", "bla2");
+
+            $(this).find(".devices").append(clone);
         }
     });
 });
