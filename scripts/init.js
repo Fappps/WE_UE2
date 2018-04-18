@@ -13,6 +13,7 @@ $(document).ready(function() {
     $(".device").draggable({
         revert: "invalid",
         cursor: "move",
+        containment: '#diagram',
         cursorAt: { top: 50, left: 45 },
         helper: function (event) {
             return $('<img width="100" src= "'+$(this).find("img").attr("src")+'" alt= "3D- Drucker" > ')
@@ -31,7 +32,9 @@ $(document).ready(function() {
             clone.attr("style", "position: absolute; left: " + relX + "px; top: " + relY+"px;");
             clone.attr("id", "bla2");
             clone.removeClass();
-            $(clone).draggable();
+            $(clone).draggable({
+                containment: '#diagram'
+            });
 
             $(this).find(".devices").append(clone);
 
