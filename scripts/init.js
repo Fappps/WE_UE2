@@ -11,7 +11,7 @@ $(document).ready(function() {
 
     // TODO init: add drag functionality to devices in sidebar
     $("div.device-image").draggable({helper: "clone", containment:"window"});
-
+    $(".device").draggable({ revert: "invalid", helper: "clone" });
 
     //$("diagram").droppable();
     $("#diagram").droppable({
