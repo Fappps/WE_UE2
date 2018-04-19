@@ -35,6 +35,7 @@ function Controls(form) {
      */
     function updateDevices() {
         // TODO controls: get values of all controls of the form and call updateDevice on each device
+        console.log("hallo");
     }
 
     /**

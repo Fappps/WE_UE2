@@ -107,7 +107,7 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
     function getRelativeCoordinates(x, y) {
         return [
             x - _this.area.offset().left - _this.area[0].clientLeft,
-            y - _this.area.offset().top - _this.area[0].clientTop
+            y - _this.area.offset().top + _this.area[0].clientTop
         ];
     }
 
@@ -118,24 +118,29 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function addDevice(event, ui) {
         // TODO diagram: check if dragged device is inside diagram, if not => do nothing
-        var clone = $(ui.draggable).clone();
+
+        var clone = $("<div></div>");
+        var svg = $(images[ui.draggable.context.getAttribute("data-device-type")]);
+      //  var clone = $(images[ui.draggable.context.getAttribute("data-device-type")]);
         var parentOffset = _this.area.parent().offset();
-        var relX = event.pageX - parentOffset.left - 50;
-        var relY = event.pageY - parentOffset.top - 120;
+        var relX = getRelativeCoordinates(event.pageX, event.pageY)[0];
+        var relY = getRelativeCoordinates(event.pageX, event.pageY)[1];
         var counter = 0;
-
-        clone.attr("style", "position: absolute; left: " + relX + "px; top: " + relY + "px;");
-        clone.attr("id", ui.draggable.context.getAttribute("title")+counter);
-        clone.removeClass();
-        $(clone).draggable({
-            containment: '#diagram'
-        });
-
+        
+        clone.css({ 'position': 'absolute', 'left': (relX - 50), 'top': (relY - 50) });
+        svg.attr("width", '100px');
+        clone.attr("id", ui.draggable.context.getAttribute("title") + counter);
+        clone.append(svg);
         _this.devices.append(clone);
+
+        clone.draggable({
+            containment: '#diagram',
+            cursor: "move"
+        });
 
         var img = ui.draggable.context.getElementsByClassName("device-image")[0].getElementsByTagName("img")[0].getAttribute("src");
         var device = new Device(
-            diagram,
+            _this,
             parseInt($(".devices-counter").text()),
             [relX, relY],
             ui.draggable.context.getAttribute("data-device-type"),
@@ -146,7 +151,12 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
             img,
             update[ui.draggable.context.getAttribute("data-device-type")]);
 
-         devicesCounter.alterCount(1);
+        console.log(device);
+
+        devicesCounter.alterCount(1);
+        controls.addDevice(device);
+
+        console.log(controls.devices);
 
 
         /**
