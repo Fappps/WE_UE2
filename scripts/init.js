@@ -20,15 +20,3 @@ $(document).ready(function () {
     });
 
 });
-
-/*
- * @param { Diagram } diagram The diagram on which this device is shown
-    * @param { number } index The index of this device
-        * @param { number[] } position The x and y coordinates of this device, relative to the diagram
-            * @param { string } type The type of this device
-                * @param { string } title The title of this device
-                    * @param {?number } min The minimum value for this device
-                        * @param {?number } max The maximum value for this device
-                            * @param { string } image The image definition for this device
-                                * @param { updateFunction } updateFunction
-*/

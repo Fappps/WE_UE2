@@ -122,12 +122,22 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
         var parentOffset = _this.area.parent().offset();
         var relX = event.pageX - parentOffset.left - 50;
         var relY = event.pageY - parentOffset.top - 120;
-
         var counter = 0;
+
+        clone.attr("style", "position: absolute; left: " + relX + "px; top: " + relY + "px;");
+        clone.attr("id", ui.draggable.context.getAttribute("title")+counter);
+        clone.removeClass();
+        $(clone).draggable({
+            containment: '#diagram'
+        });
+
+        _this.devices.append(clone);
+
         var img = ui.draggable.context.getElementsByClassName("device-image")[0].getElementsByTagName("img")[0].getAttribute("src");
         var device = new Device(
             diagram,
-            counter++, [relX, relY],
+            counter++,
+            [relX, relY],
             ui.draggable.context.getAttribute("data-device-type"),
             ui.draggable.context.getAttribute("title"),
             0,
@@ -136,15 +146,6 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
             img,
             function () { });
 
-
-        clone.attr("style", "position: absolute; left: " + relX + "px; top: " + relY + "px;");
-        clone.attr("id", "bla2");
-        clone.removeClass();
-        $(clone).draggable({
-            containment: '#diagram'
-        });
-
-        _this.devices.append(clone);
 
         /**
          * TODO diagram: if dragged device is inside diagram, add dragged device to diagram
