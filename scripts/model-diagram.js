@@ -144,8 +144,8 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
             10,
             ui.draggable.context.getAttribute("data-device-type"),
             img,
-            function () { });
-        
+            update[ui.draggable.context.getAttribute("data-device-type")]);
+
          devicesCounter.alterCount(1);
 
 
