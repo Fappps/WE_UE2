@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
     // TODO init: initialize all counters
-    var elementCounter = new Counter($("span.devices-counter"));
-    var arrowCounter = new Counter($("span.arrows-counter"));
+    var elementCounter = new Counter($(".devices-counter"));
+    var arrowCounter = new Counter($(".arrows-counter"));
     // TODO init: initialize controls
     var controls = new Controls($("#controls"));
 

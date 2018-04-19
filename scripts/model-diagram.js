@@ -136,7 +136,7 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
         var img = ui.draggable.context.getElementsByClassName("device-image")[0].getElementsByTagName("img")[0].getAttribute("src");
         var device = new Device(
             diagram,
-            counter++,
+            parseInt($(".devices-counter").text()),
             [relX, relY],
             ui.draggable.context.getAttribute("data-device-type"),
             ui.draggable.context.getAttribute("title"),
@@ -145,6 +145,8 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
             ui.draggable.context.getAttribute("data-device-type"),
             img,
             function () { });
+        
+         devicesCounter.alterCount(1);
 
 
         /**
