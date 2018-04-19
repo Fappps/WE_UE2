@@ -55,6 +55,12 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
         // TODO diagram: attach mouse move event and draw arrow if arrow active mode is on
 
         // TODO diagram: add device drop functionality by jquery ui droppable and prevent dropping outside the diagram
+        _this.area.droppable({
+            accept: '.device',
+            drop: function (event, ui) {
+                addDevice(event, ui);
+            }
+        });
 
         // TODO diagram: attach mousedown event to body element and remove all active modes like arrow drawing active mode or selected device mode
 
@@ -112,6 +118,33 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function addDevice(event, ui) {
         // TODO diagram: check if dragged device is inside diagram, if not => do nothing
+        var clone = $(ui.draggable).clone();
+        var parentOffset = _this.area.parent().offset();
+        var relX = event.pageX - parentOffset.left - 50;
+        var relY = event.pageY - parentOffset.top - 120;
+
+        var counter = 0;
+        var img = ui.draggable.context.getElementsByClassName("device-image")[0].getElementsByTagName("img")[0].getAttribute("src");
+        var device = new Device(
+            diagram,
+            counter++, [relX, relY],
+            ui.draggable.context.getAttribute("data-device-type"),
+            ui.draggable.context.getAttribute("title"),
+            0,
+            10,
+            ui.draggable.context.getAttribute("data-device-type"),
+            img,
+            function () { });
+
+
+        clone.attr("style", "position: absolute; left: " + relX + "px; top: " + relY + "px;");
+        clone.attr("id", "bla2");
+        clone.removeClass();
+        $(clone).draggable({
+            containment: '#diagram'
+        });
+
+        _this.devices.append(clone);
 
         /**
          * TODO diagram: if dragged device is inside diagram, add dragged device to diagram
