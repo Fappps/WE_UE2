@@ -16,6 +16,7 @@ const update = {
  * @param value The new value to set
  */
 function updateItemGenerator(container, min, max, value) {
+    container.find("");
     // TODO update svg: see assignment document
 
 }

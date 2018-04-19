@@ -34,8 +34,10 @@ function Controls(form) {
      * Read the current values and update all registered devices
      */
     function updateDevices() {
-        // TODO controls: get values of all controls of the form and call updateDevice on each device
-        console.log("hallo");
+        for (Device dev : devices){
+            if(dev.type=='asdlkfjkalsdf')
+                dev.updateDevices($('#control-interim-storage').text());
+        }
     }
 
     /**
@@ -43,7 +45,7 @@ function Controls(form) {
      * @param {Device} device The device object to add
      */
     function addDevice(device) {
-        // TODO controls: add dropped device to list and update the state of the device
+        devices[devices.length] = device;
     }
 
     /**
