@@ -140,13 +140,8 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
             svg,
             update[ui.draggable.context.getAttribute("data-device-type")]);
 
-        console.log(device);
-
         devicesCounter.alterCount(1);
         controls.addDevice(device);
-
-        console.log(controls.devices);
-
 
         /**
          * TODO diagram: if dragged device is inside diagram, add dragged device to diagram
