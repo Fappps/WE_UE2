@@ -50,6 +50,23 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      * Add the event handlers for the diagram
      */
     function attachEventHandlers() {
+
+        $(document).click(function (event) {
+            console.log($(event.target));
+            console.log($(event.target).context.nodeName);
+            if (($(event.target).context.nearestViewportElement &&
+                    $(event.target).context.nearestViewportElement.nodeName == ("svg")) ||
+                ($(event.target).context.parentNode.nodeName == ("div") &&
+                    $(event.target).context.nodeName == ("svg"))) {
+
+                console.log("hallo");
+                
+            }
+        });
+
+        arrowButton.click(function () {
+            console.log("hallo")
+        });
         // TODO diagram: prevent standard context menu inside of diagram
 
         // TODO diagram: attach mouse move event and draw arrow if arrow active mode is on
@@ -132,20 +149,18 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
     function addDevice(event, ui) {
         // TODO diagram: check if dragged device is inside diagram, if not => do nothing
 
-        var clone = $("<div></div>");
         var svg = $(images[ui.draggable.context.getAttribute("data-device-type")]);
         var relX = getRelativeCoordinates(event.pageX, event.pageY)[0];
         var relY = getRelativeCoordinates(event.pageX, event.pageY)[1];
 
-        if(relX-50<0 || relY-50 <0 || relX+95>768 || relY+48>548){
+        if (relX - 50 < 0 || relY - 50 < 0 || relX + 95 > 768 || relY + 48 > 548) {
             return;
         }
 
         var img = ui.draggable.context.getElementsByClassName("device-image")[0].getElementsByTagName("img")[0].getAttribute("src");
         var device = new Device(
             _this,
-            parseInt($(".devices-counter").text()),
-            [relX, relY],
+            parseInt($(".devices-counter").text()), [relX, relY],
             ui.draggable.context.getAttribute("data-device-type"),
             ui.draggable.context.getAttribute("title"),
             0,

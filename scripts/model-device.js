@@ -77,16 +77,18 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
         'left': (position[0] - 50),
         'top': (position[1] - 50)
     });
+
     image.attr("width", '100px');
+
     object.attr("id", type + index);
 
     // Initialize the event handlers
     attachEventHandlers();
-    setActive(true);
     /**
      * Add the event handlers for the diagram
      */
     function attachEventHandlers() {
+        object[0].addEventListener("click", function(){setActive(true)});
         // TODO device: attach context menu to device (call showContextMenu() in model-diagram.js if context menu is called)
 
         // TODO device: attach events for functionality like in assignment-document described
@@ -104,7 +106,19 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      * @param {boolean} active
      */
     function setActive(active) {
-        object.addClass('active')// TODO device: set/remove active class of device
+        if (active) {
+            object.css({
+                'transform': 'scale(1.1, 1.1)',
+                'border': '2px solid #ff9811',
+                'outline': 'none'
+            }) // TODO device: set/remove active class of device
+        } else {
+            object.css({
+                'transform': 'scale(1, 1)',
+                'border': 'none',
+                'outline': 'none'
+            })
+        }
     }
 
     /**
@@ -135,8 +149,8 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      * @returns {boolean} True iff there exists a direct arrow in either direction
      */
     function isConnectedTo(device) {
-        return arrowsOut.some(arrow => arrow.endDevice === device)
-            || arrowsIn.some(arrow => arrow.startDevice === device);
+        return arrowsOut.some(arrow => arrow.endDevice === device) ||
+            arrowsIn.some(arrow => arrow.startDevice === device);
     }
 
     /**
