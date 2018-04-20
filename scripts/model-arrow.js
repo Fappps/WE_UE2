@@ -26,6 +26,7 @@ function Arrow(diagram, startDevice) {
      */
     const object = $(
         // TODO arrow: create jQuery object for the SVG path
+		
     );
 
 

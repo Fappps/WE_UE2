@@ -66,14 +66,12 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
             }
         });
 
-        arrowButton.click(function () {
-            console.log("hallo")
-        });
         // TODO diagram: prevent standard context menu inside of diagram
 
         // TODO diagram: attach mouse move event and draw arrow if arrow active mode is on
 		
         // TODO diagram: add device drop functionality by jquery ui droppable and prevent dropping outside the diagram
+		
         _this.area.droppable({
             accept: '.device',
             drop: function (event, ui) {
