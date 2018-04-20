@@ -42,7 +42,9 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
 
     // TODO diagram: add variables for drawing mode and to store selected devices and arrows
 	var drawingMode = false;
-
+	var selectedArrow = null;
+	var selectDevice = null;
+	
     // Initialize events
     attachEventHandlers();
 	
@@ -70,9 +72,7 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
         // TODO diagram: prevent standard context menu inside of diagram
 
         // TODO diagram: attach mouse move event and draw arrow if arrow active mode is on
-		arrowButton.click(function () {
-			toggleArrowActive();
-		});
+		
         // TODO diagram: add device drop functionality by jquery ui droppable and prevent dropping outside the diagram
         _this.area.droppable({
             accept: '.device',
@@ -84,7 +84,9 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
         // TODO diagram: attach mousedown event to body element and remove all active modes like arrow drawing active mode or selected device mode
 		
         // TODO diagram: attach keyup event to html element for 'ENTF' ('DEL') (delete device or arrow) and 'a'/'A' (toggle arrow active mode)
-
+		arrowButton.click(function () {
+			toggleArrowActive();
+		});
         // TODO diagram: attach events for context menu items ('Detailseite', 'Löschen')
     }
 
@@ -188,6 +190,11 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function arrowClick(arrow) {
         // TODO diagram: call selectArrow() with arrow, if arrow!=selectedArrow, otherwise with null
+		if(arrow!=selectedArrow){
+			selectArrow(arrow);
+		}else{
+			selectArrow(null);
+		}
     }
 
     /**
@@ -227,6 +234,10 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function selectArrow(arrow) {
         // TODO diagram: select arrow
+		if(arrow!=null){
+			selectedArrow=arrow;
+			//set arrow selected (css)
+		}
     }
 
     /**
@@ -242,6 +253,10 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function deleteSelectedArrow() {
         // TODO diagram: delete selected arrow
+		if(selectArrow!=null){
+			//set selectedArrow unselected (css)
+			selectArrow==null;
+		}
     }
 
     /**
