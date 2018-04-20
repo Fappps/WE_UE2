@@ -44,13 +44,47 @@ function updateMachine(container, min, max, value) {
     container.find("#text3819").text(min);
     container.find("#text3819-3").text(max);
     //container.find("#text3819-3").text(100);
-    if (value<=33) {
-
+    //mit fill die farbe
+    //container.find("#path3680").attr('transform','translate(20,100) scale(10)');
+    //container.append("<line x1 =\"0\" \"0\" x2 =\"100\" \"100\" y1 =\"60\" y2 =\"30\" \"30\" \"")
+    if (value<=33){
+        container.find("#line2").remove();
+        var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
+        newLine.setAttribute('id','line2');
+        newLine.setAttribute('x1','290');
+        newLine.setAttribute('y1','300');
+        newLine.setAttribute('x2','290');
+        newLine.setAttribute('y2','330');
+        newLine.setAttribute("stroke", "rgb(0, 136, 0)");
+        newLine.setAttribute("stroke-width", "70");
+        container.find("#path3680").css({fill:"rgb(0, 136, 0)"});
+        container.find("#g3696").append(newLine);
     }else if (value<=66) {
-
+        container.find("#line2").remove();
+        var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
+        newLine.setAttribute('id','line2');
+        newLine.setAttribute('x1','290');
+        newLine.setAttribute('y1','180');
+        newLine.setAttribute('x2','290');
+        newLine.setAttribute('y2','330');
+        newLine.setAttribute("stroke", "rgb(255, 102, 0)");
+        newLine.setAttribute("stroke-width", "70");
+        container.find("#path3680").css({fill:"rgb(255,102,0)"});
+        container.find("#g3696").append(newLine);
     }else {
-
+        container.find("#line2").remove();
+        var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
+        newLine.setAttribute('id','line2');
+        newLine.setAttribute('x1','290');
+        newLine.setAttribute('y1','50');
+        newLine.setAttribute('x2','290');
+        newLine.setAttribute('y2','330');
+        newLine.setAttribute("stroke", "rgb(255, 0, 0)");
+        newLine.setAttribute("stroke-width", "70");
+        container.find("#path3680").css({fill:"rgb(255, 0, 0)"});
+        container.find("#g3696").append(newLine);
     }
+
 
 }
 
@@ -68,8 +102,6 @@ function updateConveyor(container, min, max, value) {
     }else {
         container.find(".package").show();
     }
-
-
 }
 
 /**
@@ -81,15 +113,12 @@ function updateConveyor(container, min, max, value) {
  */
 function updateIntelligentConveyor(container, min, max, value) {
     // TODO update svg: see assignment document
-    if (value==0){
-        container.find(".packageTop").hide();
-        container.find(".packageBottom").hide();
-    }else if (value<=4){
-        container.find(".packageTop").hide();
-        container.find(".packageBottom").show();
+    if (value==false){
+        container.find(".packageLeft").hide();
+        container.find(".packageRight").hide();
     }else {
-        container.find(".packageTop").show();
-        container.find(".packageBottom").show();
+        container.find(".packageLeft").show();
+        container.find(".packageRight").show();
     }
 
 }
@@ -103,12 +132,15 @@ function updateIntelligentConveyor(container, min, max, value) {
  */
 function updateInterimStorage(container, min, max, value) {
     // TODO update svg: see assignment document
-    if (value==false){
-        container.find(".packageLeft").hide();
-        container.find(".packageRight").hide();
+    if (value==0){
+        container.find(".packageTop").hide();
+        container.find(".packageBottom").hide();
+    }else if (value<=4){
+        container.find(".packageTop").hide();
+        container.find(".packageBottom").show();
     }else {
-        container.find(".packageLeft").show();
-        container.find(".packageRight").show();
+        container.find(".packageTop").show();
+        container.find(".packageBottom").show();
     }
 
 }
