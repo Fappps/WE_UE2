@@ -13,7 +13,7 @@ $(document).ready(function () {
     $(".device").draggable({
         revert: "invalid",
         cursor: "move",
-        cursorAt: { top: 50, left: 45 },
+        cursorAt: { top: 45, left: 45 },
         helper: function (event) {
             return $('<img width="100" src= "' + $(this).find("img").attr("src") + '" alt= "3D- Drucker" > ')
         }

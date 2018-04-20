@@ -121,13 +121,19 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
 
         var clone = $("<div></div>");
         var svg = $(images[ui.draggable.context.getAttribute("data-device-type")]);
-      //  var clone = $(images[ui.draggable.context.getAttribute("data-device-type")]);
         var parentOffset = _this.area.parent().offset();
         var relX = getRelativeCoordinates(event.pageX, event.pageY)[0];
         var relY = getRelativeCoordinates(event.pageX, event.pageY)[1];
         var counter = 0;
-        
-        clone.css({ 'position': 'absolute', 'left': (relX - 50), 'top': (relY - 50) });
+
+        if(relX-50<0 || relY-50 <0 || relX+95>768 || relY+48>548){
+            return;
+        }
+        clone.css({
+            'position': 'absolute',
+            'left': (relX - 50),
+            'top': (relY - 50)
+        });
         svg.attr("width", '100px');
         clone.attr("id", ui.draggable.context.getAttribute("title") + counter);
         clone.append(svg);
@@ -147,8 +153,7 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
             ui.draggable.context.getAttribute("title"),
             0,
             10,
-            ui.draggable.context.getAttribute("data-device-type"),
-            img,
+            svg,
             update[ui.draggable.context.getAttribute("data-device-type")]);
 
         console.log(device);

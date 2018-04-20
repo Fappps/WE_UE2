@@ -136,7 +136,8 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      */
     function updateDevice(value) {
         if (updateFunction) {
-            updateFunction(object, min, max, value);
+            console.log(updateFunction);
+            updateFunction(image, min, max, value);
         }
     }
 
