@@ -74,6 +74,7 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function toggleArrowActive() {
         // TODO diagram: toggle arrow active mode (call deactivateArrowDrawing() or activateArrowDrawing()
+		console.log("arrow_active");
     }
 
     /**

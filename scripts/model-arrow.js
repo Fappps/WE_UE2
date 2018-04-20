@@ -42,7 +42,7 @@ function Arrow(diagram, startDevice) {
      */
     function attachEventHandlers() {
         // TODO arrow: attach events for functionality like in assignment-document described
-
+		console.log("blabla");
         // TODO arrow optional: attach events for bonus points for 'TAB' to switch between arrows and to select arrow
     }
 
