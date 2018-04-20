@@ -35,7 +35,7 @@ function Controls(form) {
      */
     function updateDevices() {
         devices.forEach(function(entry) {
-			//console.log(entry);
+            entry.updateDevice("hallo");
 			if(entry.type=='asdlkfjkalsdf')
 				entry.updateDevices($('#control-interim-storage').text());
 		});

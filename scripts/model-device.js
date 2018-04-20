@@ -63,20 +63,26 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      * The jQuery DOM object representing this device
      */
     const object = $(
-        // TODO device: create html container
+        '<div data-vorgaenger data-nachfolger></div>'
     );
 
     // TODO device: add variables if necessary
 
 
-    // TODO device: append the device DOM object to the diagram area
+    object.append(image);
+    diagram.devices.append(object);
 
-
-    // TODO device: initialize the device position
+    object.css({
+        'position': 'absolute',
+        'left': (position[0] - 50),
+        'top': (position[1] - 50)
+    });
+    image.attr("width", '100px');
+    object.attr("id", type + index);
 
     // Initialize the event handlers
     attachEventHandlers();
-
+    setActive(true);
     /**
      * Add the event handlers for the diagram
      */
@@ -85,7 +91,10 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
 
         // TODO device: attach events for functionality like in assignment-document described
 
-        // TODO device: attach drag & drop functionality
+        object.draggable({
+            containment: '#diagram',
+            cursor: "move"
+        });
 
         // TODO device optional: attach events for bonus points for 'Tab' and 'Enter'
     }
@@ -95,7 +104,7 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      * @param {boolean} active
      */
     function setActive(active) {
-        // TODO device: set/remove active class of device
+        object.addClass('active')// TODO device: set/remove active class of device
     }
 
     /**
@@ -136,7 +145,8 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      */
     function updateDevice(value) {
         if (updateFunction) {
-            updateFunction(object, min, max, value);
+            console.log(updateFunction);
+            updateFunction(image, min, max, value);
         }
     }
 

@@ -78,5 +78,5 @@ function updateInterimStorage(container, min, max, value) {
  */
 function updateStorage(container, min, max, value) {
     // TODO update svg: see assignment document
-
+    container.find("#tspan837").text("3");
 }
