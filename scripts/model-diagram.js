@@ -121,28 +121,12 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
 
         var clone = $("<div></div>");
         var svg = $(images[ui.draggable.context.getAttribute("data-device-type")]);
-        var parentOffset = _this.area.parent().offset();
         var relX = getRelativeCoordinates(event.pageX, event.pageY)[0];
         var relY = getRelativeCoordinates(event.pageX, event.pageY)[1];
-        var counter = 0;
 
         if(relX-50<0 || relY-50 <0 || relX+95>768 || relY+48>548){
             return;
         }
-        clone.css({
-            'position': 'absolute',
-            'left': (relX - 50),
-            'top': (relY - 50)
-        });
-        svg.attr("width", '100px');
-        clone.attr("id", ui.draggable.context.getAttribute("title") + counter);
-        clone.append(svg);
-        _this.devices.append(clone);
-
-        clone.draggable({
-            containment: '#diagram',
-            cursor: "move"
-        });
 
         var img = ui.draggable.context.getElementsByClassName("device-image")[0].getElementsByTagName("img")[0].getAttribute("src");
         var device = new Device(

@@ -63,14 +63,22 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      * The jQuery DOM object representing this device
      */
     const object = $(
-        // TODO device: create html container
+        '<div></div>'// TODO device: create html container
     );
 
     // TODO device: add variables if necessary
 
 
     // TODO device: append the device DOM object to the diagram area
-
+    object.css({
+        'position': 'absolute',
+        'left': (position[0] - 50),
+        'top': (position[1] - 50)
+    });
+    image .attr("width", '100px');
+    object.attr("id", type + index);
+    object.append(image);
+    diagram.devices.append(object);
 
     // TODO device: initialize the device position
 
@@ -86,6 +94,10 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
         // TODO device: attach events for functionality like in assignment-document described
 
         // TODO device: attach drag & drop functionality
+        object.draggable({
+            containment: '#diagram',
+            cursor: "move"
+        });
 
         // TODO device optional: attach events for bonus points for 'Tab' and 'Enter'
     }
