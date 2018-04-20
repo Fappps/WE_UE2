@@ -34,10 +34,12 @@ function Controls(form) {
      * Read the current values and update all registered devices
      */
     function updateDevices() {
-        for (Device dev : devices){
-            if(dev.type=='asdlkfjkalsdf')
-                dev.updateDevices($('#control-interim-storage').text());
-        }
+        devices.forEach(function(entry) {
+			//console.log(entry);
+			if(entry.type=='asdlkfjkalsdf')
+				entry.updateDevices($('#control-interim-storage').text());
+		});
+            
     }
 
     /**
