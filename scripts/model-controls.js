@@ -9,7 +9,7 @@ function Controls(form) {
      * The current values loaded from the form
      * @type {object}
      */
-    let values = {};
+    let values = [];
 
     /**
      * A list of devices that should be updated with new values
@@ -34,12 +34,37 @@ function Controls(form) {
      * Read the current values and update all registered devices
      */
     function updateDevices() {
+        fillValues();
         devices.forEach(function(entry) {
-            entry.updateDevice("hallo");
-			if(entry.type=='asdlkfjkalsdf')
-				entry.updateDevices($('#control-interim-storage').text());
+            console.log(values);
+            console.log(values[entry.type]);
+            //console.log(entry.type);
+            //console.log(form.find("#control-"+entry.type).val());
+            entry.updateDevice(values[entry.type]);
 		});
-            
+        /*
+        for (Device dev : devices){
+            if (dev.type == 'asdlkfjkalsdf')
+                dev.updateDevices($('#control-interim-storage').text());
+        }
+        */
+        // TODO controls: get values of all controls of the form and call updateDevice on each device
+        console.log("hallo");
+    }
+
+    function fillValues(){
+        var tempVal = {};
+        values["item-generator"]= form.find("#control-item-generator option:selected").text();
+        values["machine"]= form.find("#control-machine").val();
+        values["interim-storage"]= form.find("#control-interim-storage").val();
+        values["end-storage"]= form.find("#control-end-storage").val();
+        values["trash-storage"]= form.find("#control-trash-storage").val();
+        values["intelligent-conveyor"]= form.find("#control-intelligent-conveyor").is(":checked");
+        values["conveyor"]= form.find("#control-conveyor").is(":checked");
+
+
+        //values[1]={name:"item-generator", value: form.find("#control-item-generator option:selected").text()};
+        //return tempVal;
     }
 
     /**
@@ -47,6 +72,7 @@ function Controls(form) {
      * @param {Device} device The device object to add
      */
     function addDevice(device) {
+        device.updateDevice(values[device.type]);
         devices[devices.length] = device;
     }
 

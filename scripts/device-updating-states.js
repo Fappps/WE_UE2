@@ -16,7 +16,18 @@ const update = {
  * @param value The new value to set
  */
 function updateItemGenerator(container, min, max, value) {
-    container.find("");
+    if (value=="Teilweise fertig"){
+        container.find(".thirdPlane").hide();
+        container.find(".secondPlane").show();
+    }else if (value=="Unfertig"){
+        container.find(".secondPlane").hide();
+        container.find(".thirdPlane").hide();
+    }else {
+        container.find(".secondPlane").show();
+        container.find(".thirdPlane").show();
+    }
+    //container.find("#rect839").show();
+    //container.find("");
     // TODO update svg: see assignment document
 
 }
@@ -30,6 +41,16 @@ function updateItemGenerator(container, min, max, value) {
  */
 function updateMachine(container, min, max, value) {
     // TODO update svg: see assignment document
+    container.find("#text3819").text(min);
+    container.find("#text3819-3").text(max);
+    //container.find("#text3819-3").text(100);
+    if (value<=33) {
+
+    }else if (value<=66) {
+
+    }else {
+
+    }
 
 }
 
@@ -42,6 +63,12 @@ function updateMachine(container, min, max, value) {
  */
 function updateConveyor(container, min, max, value) {
     // TODO update svg: see assignment document
+    if (value==false){
+        container.find(".package").hide();
+    }else {
+        container.find(".package").show();
+    }
+
 
 }
 
@@ -54,6 +81,16 @@ function updateConveyor(container, min, max, value) {
  */
 function updateIntelligentConveyor(container, min, max, value) {
     // TODO update svg: see assignment document
+    if (value==0){
+        container.find(".packageTop").hide();
+        container.find(".packageBottom").hide();
+    }else if (value<=4){
+        container.find(".packageTop").hide();
+        container.find(".packageBottom").show();
+    }else {
+        container.find(".packageTop").show();
+        container.find(".packageBottom").show();
+    }
 
 }
 
@@ -66,6 +103,13 @@ function updateIntelligentConveyor(container, min, max, value) {
  */
 function updateInterimStorage(container, min, max, value) {
     // TODO update svg: see assignment document
+    if (value==false){
+        container.find(".packageLeft").hide();
+        container.find(".packageRight").hide();
+    }else {
+        container.find(".packageLeft").show();
+        container.find(".packageRight").show();
+    }
 
 }
 
@@ -78,5 +122,6 @@ function updateInterimStorage(container, min, max, value) {
  */
 function updateStorage(container, min, max, value) {
     // TODO update svg: see assignment document
-    container.find("#tspan837").text("3");
+    container.find("#tspan866").text(value);
+    container.find("#tspan837").text(value);
 }
