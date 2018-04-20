@@ -41,11 +41,11 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
 
 
     // TODO diagram: add variables for drawing mode and to store selected devices and arrows
-
+	var drawingMode = false;
 
     // Initialize events
     attachEventHandlers();
-
+	
     /**
      * Add the event handlers for the diagram
      */
@@ -53,7 +53,9 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
         // TODO diagram: prevent standard context menu inside of diagram
 
         // TODO diagram: attach mouse move event and draw arrow if arrow active mode is on
-
+		arrowButton.click(function () {
+			toggleArrowActive();
+		});
         // TODO diagram: add device drop functionality by jquery ui droppable and prevent dropping outside the diagram
         _this.area.droppable({
             accept: '.device',
@@ -61,9 +63,9 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
                 addDevice(event, ui);
             }
         });
-
+		
         // TODO diagram: attach mousedown event to body element and remove all active modes like arrow drawing active mode or selected device mode
-
+		
         // TODO diagram: attach keyup event to html element for 'ENTF' ('DEL') (delete device or arrow) and 'a'/'A' (toggle arrow active mode)
 
         // TODO diagram: attach events for context menu items ('Detailseite', 'Löschen')
@@ -74,7 +76,11 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function toggleArrowActive() {
         // TODO diagram: toggle arrow active mode (call deactivateArrowDrawing() or activateArrowDrawing()
-		console.log("arrow_active");
+		if(drawingMode){
+			deactivateArrowDrawing();
+		}else{
+			activateArrowDrawing();
+		}
     }
 
     /**
@@ -82,6 +88,7 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function addArrow() {
         // TODO diagram: if drawing arrow mode is on, create Arrow object
+		
     }
 
     /**
@@ -89,13 +96,18 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function activateArrowDrawing() {
         // TODO diagram: reset selected arrows and selected devices, enable arrow active mode and add active class to arrow button in sidebar
+		arrowButton.addClass('active');
+		drawingMode=true;
+		//unselect arrows and devices
+		
     }
 
     /**
      * Set arrow drawing to inactive and delete the temporary arrow
      */
     function deactivateArrowDrawing() {
-        // TODO diagram: disable arrow active mode and remove active class to arrow button in sidebar
+		arrowButton.removeClass('active');
+		drawingMode=false;
     }
 
     /**
