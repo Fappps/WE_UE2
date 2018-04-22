@@ -93,7 +93,7 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
             "contextmenu",
             function (event) {
                 event.preventDefault();
-                diagram.showContextMenu(object, event);
+                diagram.showContextMenu(_this, event);
             });
 
         // TODO device: attach events for functionality like in assignment-document described

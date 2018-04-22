@@ -64,9 +64,10 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
             }
         });
 
-        // TODO diagram: attach mousedown event to body element and remove all active modes like arrow drawing active mode or selected device mode
+        // TODO diagram: attach mousedown event to body element and remove all active modes like arrow drawing active mode or   selected device mode
         $(document.body)[0].addEventListener("mousedown",function (event) {
             deactivateArrowDrawing();
+            $(context).hide();
             if (selectedDevice) {
                 selectedDevice.setActive(false);
                 selectedDevice = null;
@@ -78,16 +79,6 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
             toggleArrowActive();
         });
         // TODO diagram: attach events for context menu items ('Detailseite', 'Löschen')
-        /*
-        $(areaSelector).on('contextmenu', function(event) {
-            event.preventDefault();
-            $(context).css({
-                'top': event.pageY,
-                'left': event.pageX
-            });
-        });*/
-
-
     }
 
 
@@ -151,8 +142,6 @@ function getRelativeCoordinates(x, y) {
  * @param ui The jQuery UI instance
  */
 function addDevice(event, ui) {
-    // TODO diagram: check if dragged device is inside diagram, if not => do nothing
-
     var svg = $(images[ui.draggable.context.getAttribute("data-device-type")]);
     var relX = getRelativeCoordinates(event.pageX, event.pageY)[0];
     var relY = getRelativeCoordinates(event.pageX, event.pageY)[1];
@@ -173,16 +162,6 @@ function addDevice(event, ui) {
 
     devicesCounter.alterCount(1);
     controls.addDevice(device);
-
-    /**
-     * TODO diagram: if dragged device is inside diagram, add dragged device to diagram
-     *                 + get data added to html object in overview
-     *                 + add image of device-resources.js
-     *                 + add update function of device-updating-states.js
-     *                 + create object of Device and transmit parameters
-     *                 + add device to Controls
-     *                 + adapt device counter of controls
-     */
 }
 
 /**
@@ -205,12 +184,12 @@ function arrowClick(arrow) {
  */
 function showContextMenu(device, event) {
     // TODO diagram: show context menu + select device + deactivate arrow drawing
-    device.bind("contextmenu", function () {
+    $(event.target).bind("contextmenu", function () {
         $(context).css({
             top: event.pageY + 'px',
             left: event.pageX + 'px'
         }).show();
-        if (selectedDevice != device) {
+        if (selectedDevice && selectedDevice != device) {
             selectedDevice.setActive(false);
         }
     });
