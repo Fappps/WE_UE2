@@ -63,7 +63,7 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      * The jQuery DOM object representing this device
      */
     const object = $(
-        '<div data-vorgaenger data-nachfolger></div>'
+        '<div class="device" data-vorgaenger data-nachfolger></div>'
     );
 
     // TODO device: add variables if necessary
@@ -78,7 +78,8 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
         'top': (position[1] - 50)
     });
 
-    image.attr("width", '100px');
+    //image.attr("width", '100px');
+    image.attr("class", 'device-image');
     object.attr("id", type + index);
 
     // Initialize the event handlers
@@ -87,16 +88,12 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      * Add the event handlers for the diagram
      */
     function attachEventHandlers() {
-        // TODO device: attach context menu to device (call showContextMenu() in model-diagram.js if context menu is called)
-
         object[0].addEventListener(
             "contextmenu",
             function (event) {
                 event.preventDefault();
                 diagram.showContextMenu(_this, event);
             });
-
-        // TODO device: attach events for functionality like in assignment-document described
 
         object[0].addEventListener("mousedown", function () {
             diagram.selectDevice(_this);
@@ -117,19 +114,9 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      */
     function setActive(active) {
         if (active) {
-
-            console.log("active3");
-            object.css({
-                'transform': 'scale(1.1, 1.1)',
-                'border': '2px solid #ff9811',
-                'outline': 'none'
-            }) // TODO device: set/remove active class of device
+            object.addClass("active");
         } else {
-            object.css({
-                'transform': 'scale(1, 1)',
-                'border': 'none',
-                'outline': 'none'
-            })
+            object.removeClass("active");
         }
     }
 
