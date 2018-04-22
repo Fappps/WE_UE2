@@ -89,6 +89,7 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      */
     function attachEventHandlers() {
         object[0].addEventListener("contextmenu",function (event) {
+            event.preventDefault();
                 diagram.showContextMenu(_this, event);
             });
 
