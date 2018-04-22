@@ -66,11 +66,6 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
 
         // TODO diagram: attach mousedown event to body element and remove all active modes like arrow drawing active mode or selected device mode
         $(document.body).click(function (event) {
-            if (($(event.target).context.nearestViewportElement &&
-                    $(event.target).context.nearestViewportElement.nodeName == ("svg")) ||
-                ($(event.target).context.parentNode.nodeName == ("div") &&
-                    $(event.target).context.nodeName == ("svg")))
-                return;
             deactivateArrowDrawing();
             if (selectedDevice) {
                 selectedDevice.setActive(false);
