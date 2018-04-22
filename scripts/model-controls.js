@@ -36,10 +36,6 @@ function Controls(form) {
     function updateDevices() {
         fillValues();
         devices.forEach(function(entry) {
-            console.log(values);
-            console.log(values[entry.type]);
-            //console.log(entry.type);
-            //console.log(form.find("#control-"+entry.type).val());
             entry.updateDevice(values[entry.type]);
 		});
         /*
@@ -49,7 +45,6 @@ function Controls(form) {
         }
         */
         // TODO controls: get values of all controls of the form and call updateDevice on each device
-        console.log("hallo");
     }
 
     function fillValues(){

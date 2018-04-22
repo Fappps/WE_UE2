@@ -79,7 +79,6 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
     });
 
     image.attr("width", '100px');
-
     object.attr("id", type + index);
 
     // Initialize the event handlers
@@ -88,12 +87,21 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      * Add the event handlers for the diagram
      */
     function attachEventHandlers() {
-        object[0].addEventListener("click", function(){setActive(true)});
         // TODO device: attach context menu to device (call showContextMenu() in model-diagram.js if context menu is called)
 
-        object[0].addEventListener("mousedown", function (event) {diagram.showContextMenu(_this, event)});
+        object[0].addEventListener(
+            "contextmenu",
+             function (event) {
+                event.preventDefault();
+                 diagram.showContextMenu(_this, event);
+                });
 
         // TODO device: attach events for functionality like in assignment-document described
+
+        object.click(function(){
+            diagram.selectDevice(_this);
+            console.log("active1");
+        });
 
         object.draggable({
             containment: '#diagram',
@@ -109,6 +117,8 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      */
     function setActive(active) {
         if (active) {
+            
+            console.log("active3");
             object.css({
                 'transform': 'scale(1.1, 1.1)',
                 'border': '2px solid #ff9811',
@@ -161,7 +171,6 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      */
     function updateDevice(value) {
         if (updateFunction) {
-            console.log(updateFunction);
             updateFunction(image, min, max, value);
         }
     }
