@@ -91,14 +91,14 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
 
         object[0].addEventListener(
             "contextmenu",
-             function (event) {
+            function (event) {
                 event.preventDefault();
-                 diagram.showContextMenu(_this, event);
-                });
+                diagram.showContextMenu(object, event);
+            });
 
         // TODO device: attach events for functionality like in assignment-document described
 
-        object[0].addEventListener("mousedown", function(){
+        object[0].addEventListener("mousedown", function () {
             diagram.selectDevice(_this);
             console.log("active1");
         });
@@ -117,7 +117,7 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      */
     function setActive(active) {
         if (active) {
-            
+
             console.log("active3");
             object.css({
                 'transform': 'scale(1.1, 1.1)',

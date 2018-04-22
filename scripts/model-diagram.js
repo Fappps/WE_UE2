@@ -65,7 +65,7 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
         });
 
         // TODO diagram: attach mousedown event to body element and remove all active modes like arrow drawing active mode or selected device mode
-        $(document.body).click(function (event) {
+        $(document.body)[0].addEventListener("mousedown",function (event) {
             deactivateArrowDrawing();
             if (selectedDevice) {
                 selectedDevice.setActive(false);
@@ -205,7 +205,7 @@ function arrowClick(arrow) {
  */
 function showContextMenu(device, event) {
     // TODO diagram: show context menu + select device + deactivate arrow drawing
-    $(device).bind("contextmenu", function () {
+    device.bind("contextmenu", function () {
         $(context).css({
             top: event.pageY + 'px',
             left: event.pageX + 'px'
