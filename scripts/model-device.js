@@ -62,24 +62,42 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
     /**
      * The jQuery DOM object representing this device
      */
-    const object = $(
+   /* const object = $(
         '<div class="device dropped" data-vorgaenger data-nachfolger></div>'
+    );*/
+
+    const object = $(
+        // TODO device: create html container
+        '<li class="device dropped">'+
+            '<dl class="device-properties">'+
+                '<dt class="accessibility">Maschine</dt>'+
+                '<dd class="device-type">'+title+' '+index+'</dd>'+
+                '<dt>Vorgänger:</dt>'+
+                '<dd class="device-predecessors"></dd>'+
+                '<dt>Nachfolger:</dt>'+
+                '<dd class="device-successors"></dd>'+
+            '</dl>'+
+            '<div class="device-image"></div>'+
+        '</li>'
     );
 
     // TODO device: add variables if necessary
 
-
-    object.append(image);
+    object.find(".device-image").append(image);
     diagram.devices.append(object);
-
+    object.css({
+        left:position[0]-50,
+        top:position[1]-50
+      });
+      /*
     object.css({
         'position': 'absolute',
         'left': (position[0] - 50),
         'top': (position[1] - 50)
-    });
+    });*/
 
     //image.attr("width", '100px');
-    image.attr("class", 'device-image');
+ //   image.attr("class", 'device-image');
     object.attr("id", type + index);
 
     // Initialize the event handlers

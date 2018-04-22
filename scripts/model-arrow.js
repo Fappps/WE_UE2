@@ -25,21 +25,20 @@ function Arrow(diagram, startDevice) {
      * The jQuery DOM object representing this arrow
      */
     const object = $(
-        '<svg width="72px" height="20px">'+
+        '<svg width="100%" height="100%">'+
  //       '<defs>'+
  //           '<marker id="arrow-marker-side" markerWidth="10" markerHeight="10" refY="4" orient="auto">'+
  //               '<path d="M0,0 L0,8 L8,4 z" class="arrow-marker"></path>'+
  //           '</marker>'+
  //       '</defs>'+
- //       '<path d="M10,10 L70,10" class="arrow-path" marker-end="url(#arrow-marker-side)"></path>'+
+        '<path d="M10,10 L70,10" class="arrow-path" marker-end="url(#arrow-marker-side)"></path>'+
         '</svg>'
     );
 
-
+    console.log(startDevice);
     // TODO arrow: add variables if necessary
-    var arrowPath = $('<path d="M10,10 L70,10" class="arrow-path" marker-end="url(#arrow-marker-side)"></path>');
-    object.add(arrowPath);
     diagram.arrows.append(object);
+    object.find("path").attr("d","M10,10 L170,10");
 
     // TODO arrow: append the arrow DOM object to the arrows svg
 

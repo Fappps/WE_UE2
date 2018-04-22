@@ -130,8 +130,10 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      * Append the currently drawn arrow to the diagram
      */
     function addArrow() {
+        if(drawingMode){
             var arrow = new Arrow(_this, selectedDevice);
             console.log("new arrow");
+        }
         // TODO diagram: if drawing arrow mode is on, create Arrow object
 
     }
