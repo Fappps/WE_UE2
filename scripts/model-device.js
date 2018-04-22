@@ -91,6 +91,8 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
         object[0].addEventListener("click", function(){setActive(true)});
         // TODO device: attach context menu to device (call showContextMenu() in model-diagram.js if context menu is called)
 
+        object[0].addEventListener("mousedown", function (event) {diagram.showContextMenu(_this, event)});
+
         // TODO device: attach events for functionality like in assignment-document described
 
         object.draggable({

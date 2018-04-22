@@ -86,6 +86,15 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
 			toggleArrowActive();
 		});
         // TODO diagram: attach events for context menu items ('Detailseite', 'Löschen')
+        /*
+        $(areaSelector).on('contextmenu', function(event) {
+            event.preventDefault();
+            $(context).css({
+                'top': event.pageY,
+                'left': event.pageX
+            });
+        });*/
+
     }
 
     /**
@@ -202,6 +211,24 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function showContextMenu(device, event) {
         // TODO diagram: show context menu + select device + deactivate arrow drawing
+        $(document).bind("contextmenu", function() {
+            $(context).css( {
+                top : event.pageY + 'px',
+                left : event.pageX + 'px'
+            }).show();
+            //[URL]//device.setActive(true);[/URL]
+            return false;
+        });
+
+        $(document).ready(function() {
+            $(context).click(function() {
+                $(context).hide();
+            });
+            $(document).click(function() {
+                $(context).hide();
+            });
+        });
+
     }
 
     /**
