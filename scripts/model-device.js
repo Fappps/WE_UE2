@@ -103,6 +103,7 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
         });
 
         // TODO device optional: attach events for bonus points for 'Tab' and 'Enter'
+
     }
 
     /**

@@ -87,6 +87,21 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
             toggleArrowActive();
         });
         // TODO diagram: attach events for context menu items ('Detailseite', 'Löschen')
+        $(".contextView").on("mousedown", function(event){
+            alert(selectedDevice.type + selectedDevice.index);
+            //alert(event.target.attr('value'));
+        });
+
+        $(".contextDelete").on("mousedown", function(event){
+            deleteSelectedDevice();
+        });
+
+
+
+
+
+
+
     }
 
 
@@ -203,7 +218,9 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
                 selectedDevice.setActive(false);
             }
             */
+
         });
+
         /*
         selectedDevice = device;
         device.setActive(true);
@@ -295,6 +312,7 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function deleteSelectedDevice() {
         // TODO diagram: delete selected device
+        $(document).find("#"+selectedDevice.type+selectedDevice.index).remove();
     }
 
     // Export some methods
