@@ -35,10 +35,11 @@ function Arrow(diagram, startDevice) {
         '</svg>'
     );
 
-    console.log(startDevice);
+    let sPos=diagram.devices.find("#"+startDevice.type+startDevice.index).position();
+    console.log(sPos);
     // TODO arrow: add variables if necessary
-    diagram.arrows.append(object);
-    object.find("path").attr("d","M10,10 L170,10");
+    object.find("path").attr("d","M"+sPos.left+","+sPos.top+" L170,10");
+    object.css({"display":"none"});
 
     // TODO arrow: append the arrow DOM object to the arrows svg
 
@@ -91,9 +92,11 @@ function Arrow(diagram, startDevice) {
      * Update the arrow path according to the device positions, or hide the path if no end device is set
      */
     function updateArrow() {
-        var endPos = endDevice.getIntersectionCoordinates([200, 200]);
-        arrowPath.attr("x2", endPos[0]);
-        arrowPath.attr("y2", endPos[1]);
+        let ePos=diagram.devices.find("#"+_this.endDevice.type+_this.endDevice.index).position();
+        let pos1=_this.startDevice.getIntersectionCoordinates([ePos.left, ePos.top]);
+        let pos2=_this.endDevice.getIntersectionCoordinates([pos1[0], pos1[1]]);
+        object.find("path").attr("d","M"+pos1[0]+","+pos1[1]+" L"+pos2[0]+","+pos2[1]);
+        object.css({"display":"flex"});
         //arrowPath.attr("d", "M"+starPos[0]+","+starPos[1]+ " L"+endPos[0]+","+endPos[1]);
         // TODO arrow: draw an arrow between the start and end device
         // HINT You can use Device.getCenterCoordinates and Device.getIntersectionCoordinates
@@ -106,6 +109,7 @@ function Arrow(diagram, startDevice) {
     function setEndDevice(device) {
         _this.endDevice = device;
         updateArrow();
+        diagram.arrows.append(object);
     }
 
     /**

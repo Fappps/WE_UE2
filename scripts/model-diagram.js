@@ -43,6 +43,7 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
     // TODO diagram: add variables for drawing mode and to store selected devices and arrows
     let drawingMode = false;
     let selectedDevice = null;
+    let selectedArrow = null;
 
     // Initialize events
     attachEventHandlers();
@@ -130,9 +131,12 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      * Append the currently drawn arrow to the diagram
      */
     function addArrow() {
-        if(drawingMode){
+        if(drawingMode && selectedDevice && selectedArrow==null){
             var arrow = new Arrow(_this, selectedDevice);
-            console.log("new arrow");
+            selectedArrow=arrow;
+        }else if(drawingMode && selectedDevice && selectedArrow!=null){
+            selectedArrow.setEndDevice(selectedDevice);
+            selectedArrow=null;
         }
         // TODO diagram: if drawing arrow mode is on, create Arrow object
 
