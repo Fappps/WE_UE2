@@ -75,7 +75,7 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
             }
 
             deactivateArrowDrawing();
-            $(context).remove();
+            $(context).hide();
             if (selectedDevice) {
                 selectedDevice.setActive(false);
                 selectedDevice = null;
@@ -192,19 +192,22 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      */
     function showContextMenu(device, event) {
         // TODO diagram: show context menu + select device + deactivate arrow drawing
-        $(event.target).bind("contextmenu", function () {
+        console.log("lol");
+         $(document).bind("contextmenu", function () {
             $(context).css({
                 top: event.pageY + 'px',
                 left: event.pageX + 'px'
             }).show();
+            /*
             if (selectedDevice && selectedDevice != device) {
                 selectedDevice.setActive(false);
             }
+            */
         });
-
+        /*
         selectedDevice = device;
         device.setActive(true);
-
+        */
     }
 
     /**

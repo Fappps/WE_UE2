@@ -88,10 +88,7 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      * Add the event handlers for the diagram
      */
     function attachEventHandlers() {
-        object[0].addEventListener(
-            "contextmenu",
-            function (event) {
-                event.preventDefault();
+        object[0].addEventListener("contextmenu",function (event) {
                 diagram.showContextMenu(_this, event);
             });
 
