@@ -63,7 +63,7 @@ function Device(diagram, index, position, type, title, min, max, image, updateFu
      * The jQuery DOM object representing this device
      */
     const object = $(
-        '<div class="device" data-vorgaenger data-nachfolger></div>'
+        '<div class="device dropped" data-vorgaenger data-nachfolger></div>'
     );
 
     // TODO device: add variables if necessary

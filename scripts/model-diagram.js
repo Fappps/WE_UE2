@@ -58,7 +58,14 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
 
         // TODO diagram: add device drop functionality by jquery ui droppable and prevent dropping outside the diagram
         _this.area.droppable({
-            accept: '.device',
+            accept: function(ele){
+                if(ele.hasClass("dropped")){
+                    return false;
+                }
+                if(ele.hasClass("device")){
+                    return true;
+                }
+            },
             drop: function (event, ui) {
                 addDevice(event, ui);
             }
@@ -123,6 +130,8 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
      * Append the currently drawn arrow to the diagram
      */
     function addArrow() {
+            var arrow = new Arrow(_this, selectedDevice);
+            console.log("new arrow");
         // TODO diagram: if drawing arrow mode is on, create Arrow object
 
     }
@@ -282,7 +291,8 @@ function Diagram(areaSelector, arrowButtonSelector, devicesCounter, arrowsCounte
 
                 console.log("active2");
                 device.setActive(true);
-                selectedDevice = device;
+                selectedDevice = device;        
+                addArrow();
             }
         } else {
 

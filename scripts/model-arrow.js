@@ -25,13 +25,21 @@ function Arrow(diagram, startDevice) {
      * The jQuery DOM object representing this arrow
      */
     const object = $(
-        // TODO arrow: create jQuery object for the SVG path
-		
+        '<svg width="72px" height="20px">'+
+ //       '<defs>'+
+ //           '<marker id="arrow-marker-side" markerWidth="10" markerHeight="10" refY="4" orient="auto">'+
+ //               '<path d="M0,0 L0,8 L8,4 z" class="arrow-marker"></path>'+
+ //           '</marker>'+
+ //       '</defs>'+
+ //       '<path d="M10,10 L70,10" class="arrow-path" marker-end="url(#arrow-marker-side)"></path>'+
+        '</svg>'
     );
 
 
     // TODO arrow: add variables if necessary
-
+    var arrowPath = $('<path d="M10,10 L70,10" class="arrow-path" marker-end="url(#arrow-marker-side)"></path>');
+    object.add(arrowPath);
+    diagram.arrows.append(object);
 
     // TODO arrow: append the arrow DOM object to the arrows svg
 
@@ -74,6 +82,8 @@ function Arrow(diagram, startDevice) {
      * @param {number[]} endPosition New end position of the arrow
      */
     function updateEndPosition(endPosition) {
+        var starPos = startDevice.getIntersectionCoordinates(endPosition);
+        arrowPath.attr("d", "M" + starPos[0] + "," + starPos[1] + " L" + endPosition[0] + "," + endPosition[1]);
         // TODO arrow: draw an arrow between the start device and the given end position
         // HINT You can use Device.getIntersectionCoordinates to calculate the coordinates for the start device
     }
@@ -82,6 +92,10 @@ function Arrow(diagram, startDevice) {
      * Update the arrow path according to the device positions, or hide the path if no end device is set
      */
     function updateArrow() {
+        var endPos = endDevice.getIntersectionCoordinates([200, 200]);
+        arrowPath.attr("x2", endPos[0]);
+        arrowPath.attr("y2", endPos[1]);
+        //arrowPath.attr("d", "M"+starPos[0]+","+starPos[1]+ " L"+endPos[0]+","+endPos[1]);
         // TODO arrow: draw an arrow between the start and end device
         // HINT You can use Device.getCenterCoordinates and Device.getIntersectionCoordinates
     }
